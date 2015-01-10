@@ -1,0 +1,56 @@
+# BASE MODEL
+model fundusz.mod;
+
+# PARAMETRY
+param MAX_RYZYKO; # sztywne ograniczenie steruj¹ce
+
+param ASPIRACJA_ZYSK;
+param ASPIRACJA_MOBILNOSC;
+
+param BETA;
+param LAMBDA_ZYSK;
+param LAMBDA_MOBILNOSC;
+param EPSILON;
+
+# OGRANICZENIA STERUJACE
+subject to oMAX_RYZYKO: RYZYKO <= MAX_RYZYKO;
+
+# FUNKCJE OSIAGNIECIA
+var S_ZYSK{1..2};
+subject to oS_ZYSK1: S_ZYSK[1] = LAMBDA_ZYSK * (ZYSK - ASPIRACJA_ZYSK);
+subject to oS_ZYSK2: S_ZYSK[2] = BETA * S_ZYSK[1];
+
+var S_MOBILNOSC{1..2};
+subject to oS_MOBILNOSC1: S_MOBILNOSC[1] = LAMBDA_MOBILNOSC * (MOBILNOSC - ASPIRACJA_MOBILNOSC);
+subject to oS_MOBILNOSC2: S_MOBILNOSC[2] = BETA * S_MOBILNOSC[1];
+
+# SKALARYZUJACA FUNKCJA OSIAGNIECIA
+var Z_ZYSK;
+subject to oZ_ZYSK1: Z_ZYSK <= S_ZYSK[1];
+subject to oZ_ZYSK2: Z_ZYSK <= S_ZYSK[2];
+
+var Z_MOBILNOSC;
+subject to oZ_MOBILNOSC1: Z_MOBILNOSC <= S_MOBILNOSC[1];
+subject to oZ_MOBILNOSC2: Z_MOBILNOSC <= S_MOBILNOSC[2];
+
+var Z_MIN;
+subject to oZ_MIN1: Z_MIN <= Z_ZYSK;
+subject to oZ_MIN2: Z_MIN <= Z_MOBILNOSC;
+
+var S_SUM = Z_ZYSK + Z_MOBILNOSC;
+
+var S = Z_MIN + EPSILON*S_SUM;
+
+# CEL
+maximize SKALAR: S;
+
+#DATA
+data funduszMPR.dat;
+#SOLVE
+solve;
+# DISPLAY
+display ZYSK;
+display RYZYKO;
+display MOBILNOSC;
+
+display x;

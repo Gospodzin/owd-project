@@ -1,0 +1,9 @@
+param MAX_RYZYKO:= 1.5e+6;
+
+param ASPIRACJA_ZYSK:= 5.0e+4;
+param ASPIRACJA_MOBILNOSC:= 4.0e+5;
+
+param BETA:= 1e-3;
+param LAMBDA_ZYSK:=5; 
+param LAMBDA_MOBILNOSC:=1; 
+param EPSILON:=1e-3;
