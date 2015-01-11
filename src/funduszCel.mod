@@ -41,8 +41,11 @@ data funduszCel.dat;
 # SOLVE
 solve;
 # DISPLAY
-display ZYSK;
+display MAX_RYZYKO;
+display ASPIRACJA_ZYSK;
+display ASPIRACJA_MOBILNOSC;
 display RYZYKO;
+display ZYSK;
 display MOBILNOSC;
 
 display x;
