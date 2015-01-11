@@ -1,7 +1,7 @@
 param MAX_RYZYKO:= 2.5e+6;
 
-param ASPIRACJA_ZYSK:= 6.0e+4;
-param ASPIRACJA_MOBILNOSC:= 2.0e+5;
+param ASPIRACJA_ZYSK:= 1.0e+4;
+param ASPIRACJA_MOBILNOSC:= 1.0e+5;
 
 param WM_ZYSK:= 10;
 param WP_ZYSK:= 0;
